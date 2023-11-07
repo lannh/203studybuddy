@@ -23,7 +23,7 @@ env:
   AZURE_WEBAPP_NAME: 203StudyBuddy    # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '7.0'                 # set this to the .NET Core version to use
-
+  
 on:
   push:
     branches: [ "develop" ]
@@ -51,6 +51,16 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
+
+      - name: App Settings Variable Substitution
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: '${{env.DOTNET_ROOT}}/appsettings.json'
+        env:
+          203StuddyBuddyDatabase.ConnectionString: ${{ secrets.MONGODB_CONNECTION_STRING }}
+          203StuddyBuddyDatabase.DatabaseName: ${{ secrets.DATABASE_NAME }}
+          203StuddyBuddyDatabase.UsersCollectionName: ${{ secrets.USERS_COLLECTION_NAME }}
+          203StuddyBuddyDatabase.ArticlesCollectionName: ${{ secrets.ARTICLES_COLLECTION_NAME }}
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
