@@ -49,6 +49,9 @@ namespace senior_project.Controllers
                 return BadRequest("Invalid access token"); ;
             }
 
+            if (user.savedArticles == null)
+                return new List<String>();
+
             return user.savedArticles;
         }
 

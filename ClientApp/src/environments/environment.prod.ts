@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://localhost:7227cd',
-  articlesApiUrl: 'https://localhost:5001/api/articles/all',
-  savedArticlesApiUrl: 'https://localhost:5001/api/users/saved-articles',
+  apiUrl: 'https://203studybuddy.azurewebsites.net/api',
+  articlesApiUrl: 'https://203studybuddy.azurewebsites.net/api/articles/all',
+  savedArticlesApiUrl: 'https://203studybuddy.azurewebsites.net/api/users/saved-articles',
 };
 

@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { retry, shareReplay } from 'rxjs/operators';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
-
+import { of } from 'rxjs';
 
 
 @Injectable({

@@ -9,6 +9,7 @@
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <RootNamespace>senior_project</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>fa9a3453-2c6d-4ffd-9896-6e27aa4ea3f9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
