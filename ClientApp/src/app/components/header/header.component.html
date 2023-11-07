@@ -1,0 +1,35 @@
+
+<mat-toolbar class="header">
+
+    <button
+        mat-icon-button
+        class="menu-icon"
+        (click)="onToggleSidenav()">
+        <mat-icon style="font-size : 5rem; width: 5rem; height: 5rem;">menu</mat-icon>
+    </button>
+
+    <mat-label class="app-title">203 Study Buddy</mat-label>
+  
+    <div fxFlex fxLayout fxLayoutAlign="end">
+       <!-- <div class="form__group">
+            <input type="input" class="form__field" placeholder="Search..."
+                [(ngModel)]="searchValue" 
+                name="search" id='search' required />
+            <button matSuffix mat-icon-button (click)="searchValue=''" class="search-icon">
+                <mat-icon>search</mat-icon>
+            </button>
+
+        </div> -->
+
+        <button
+            mat-icon-button
+            class="menu-icon"
+            [matMenuTriggerFor]="menu">
+            <mat-icon style="font-size : 5rem; width: 5rem; height: 5rem;">person</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/saved-articles">Saved Articles</button>
+            <button mat-menu-item (click)="logOut()">Logout</button>
+        </mat-menu>
+    </div>
+  </mat-toolbar>

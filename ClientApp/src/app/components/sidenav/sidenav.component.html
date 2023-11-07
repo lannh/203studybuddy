@@ -1,0 +1,35 @@
+
+
+
+<mat-nav-list>
+    <!-- <a mat-list-item routerLink="/" (click)="onSidenavClose()" class="nav-item">
+        <div class="nav-item-line">
+            <img class="icon" src="assets/home.png"/>
+            <span class="nav-caption">Home</span> 
+        </div>
+    </a> -->
+    <a mat-list-item routerLink="/" (click)="onSidenavClose()" class="nav-item">
+        <div class="nav-item-line">
+            <img class="icon" src="assets/study-materials.png"/>
+            <span class="nav-caption">Study Materials</span> 
+        </div>
+    </a>
+    <a mat-list-item routerLink="/chatbot" (click)="onSidenavClose()" class="nav-item">
+        <div class="nav-item-line">
+            <img class="icon" src="assets/chatbot.png"/>
+            <span class="nav-caption">Chatbot</span> 
+        </div>
+    </a>
+    <a mat-list-item routerLink="/saved-articles" (click)="onSidenavClose()" class="nav-item">
+        <div class="nav-item-line">
+            <img class="icon" src="assets/saved-pages.png"/>
+            <span class="nav-caption">Saved Pages</span> 
+        </div>
+    </a>
+    <a mat-list-item (click)="logOut()" class="nav-item">
+        <div class="nav-item-line">
+            <img class="icon" src="assets/logout.png"/>
+            <span class="nav-caption">Logout</span> 
+        </div>
+    </a>
+  </mat-nav-list>

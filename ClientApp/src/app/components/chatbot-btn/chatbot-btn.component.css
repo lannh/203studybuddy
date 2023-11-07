@@ -1,0 +1,9 @@
+.chatbot-btn{
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    z-index: 100;
+    color: #F8EFD9;
+    background-color: #3B5550;
+    transform: scale(1.3);
+}

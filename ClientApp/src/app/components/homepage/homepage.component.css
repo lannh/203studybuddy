@@ -1,0 +1,29 @@
+
+.calendar-view {
+    flex: 2 1 0;
+    border-right: solid 2px #7A674A;
+    height: fit-content;
+    padding: 20px;
+    min-height: 100%;
+}
+  
+.mat-grid-tile{
+    min-height: 100%;
+    overflow: scroll;
+
+}
+::ng-deep.mat-grid-tile-content {
+    flex-direction: column !important;
+    margin: 20px !important;
+}
+
+
+.saved-pages-view {
+    flex: 1 1 0;
+    padding: 20px;
+}
+
+.main{
+    display: flex;
+    height: 100%;
+}

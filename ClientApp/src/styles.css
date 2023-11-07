@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
+@import url('@angular/material/prebuilt-themes/deeppurple-amber.css');
+@import url('node_modules/bootstrap/dist/css/bootstrap.min.css');
+@import url('node_modules/bootstrap-icons/font/bootstrap-icons.css');
+
+a {
+  color: #0366d6;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background-color: #ffffff;
+
+    min-width:1000px;        /* Suppose you want minimum width of 1000px */
+    width: auto !important;  /* Firefox will set width as auto */
+    width:1000px;            /* As IE6 ignores !important it will set width as 1000px; */
+    color: #3B5550;
+}
+
+body.login{
+  background-color: #F8EFD9 !important;
+}
+
+
+
+.mat-tab-group.mat-primary .mat-ink-bar, 
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: red;
+}
+
+
+.article-body h1 {
+  color: #bc6c25;
+  font-size: larger;
+}
+
+main{
+  height: 90%;
+}

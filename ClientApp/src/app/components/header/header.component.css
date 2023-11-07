@@ -1,0 +1,72 @@
+
+.header{
+    min-width: 100%;
+    width: auto;
+    height: 10%;
+    background-color: #F8EFD9;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    min-height: 9rem;
+}
+
+
+.menu-icon{
+    width : 6.5rem; height: 6.5rem;
+    color: #3B5550;
+    text-shadow: 0px 2px 2px rgb(50 50 50 / 38%);
+
+}
+
+.app-title {
+    line-height: normal;
+    font-size: 3rem;
+    color: #3B5550;
+    font-family: 'Fugaz One', cursive;
+    text-shadow: 0px 2px 2px rgb(50 50 50 / 38%);
+    margin-left: 30px
+  }
+
+
+.form__field {
+    font-family: inherit;
+    width: 200px;
+    border: 0;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #3B5550;
+
+    padding: 7px 0;
+    background: transparent;
+    transition: 0.2s;
+
+}
+
+
+.form__group {
+    position: relative;
+    display: flex;
+    border-bottom: 2px solid #7A674A;
+    transition: 0.2s;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+}
+  
+
+.form__group:hover {
+    border-bottom: 3px solid #6F8829;
+    transition:0.2s; 
+    
+}
+
+
+.search-icon{
+    color: #7A674A;
+    text-shadow: 0px 2px 2px rgb(50 50 50 / 38%);
+
+}
+
+.form__group:hover .search-icon{
+    color: #6F8829;
+    text-shadow: 0px 2px 2px rgb(50 50 50 / 38%);
+
+}
+

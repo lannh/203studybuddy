@@ -1,0 +1,55 @@
+
+
+
+
+    <div class="saved-pages-list-view">
+  
+        <div class="form__group">
+                <button class="search-icon" mat-icon-button disabled>
+                    <mat-icon>search</mat-icon>
+                </button>
+                <input type="input" class="form__field" placeholder="Search..."
+                [(ngModel)]="searchValue" 
+                name="search" id='search' required />
+            <button matSuffix mat-icon-button (click)="searchValue=''" class="search-icon">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+        <mat-tab-group class="articles-tabs" dynamicHeight>
+            <mat-tab [label]="tab" *ngFor="let tab of tabs">
+                <div class="tab-view">
+                    <div class="article-view">
+                        <div *ngIf="(getArticlesFrom(tab)  | articlesFilter:searchValue | trimArticles) as articlesList">
+                        <div  class="one-article-view" *ngFor="let article of articlesList">
+
+                                <div class="article-title">
+                                        <div role="button" [routerLink]="['/articles', article.title]" (click)="onArticleClick(article)" class="nav-item">
+                                            <span class="title">{{article.title}}</span>
+
+                                        </div>
+                                        <div class="description" markdown katex [data]="article.description" ></div>
+                                    
+                                </div>
+
+                                <div class="save-btn">
+                                    <img *ngIf="article.isSave" class="icon" src="assets/saved.png" (click)="changeSaveStatus(article)"/>
+                                    <img *ngIf="!article.isSave" class="icon" src="assets/unsaved.png" (click)="changeSaveStatus(article)"/>
+                                </div>
+                            
+                        </div>
+                        
+
+                            <div class="no-result-found">
+                                <span class="no-result-found-text" *ngIf="articlesList.length === 0">No Results Found</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+      
+    </div>
+  
+  
+  

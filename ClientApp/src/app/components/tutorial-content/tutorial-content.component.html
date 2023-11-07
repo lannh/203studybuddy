@@ -1,0 +1,8 @@
+<div *ngIf="article" class="article">
+    <div class="article-title"> {{article.title}} </div>
+
+    <div class="article-body" markdown katex
+    [data]="article.description" >
+    
+    </div>
+</div>
