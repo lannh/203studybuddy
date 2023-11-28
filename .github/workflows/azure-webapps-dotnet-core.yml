@@ -62,7 +62,12 @@ jobs:
           203StuddyBuddyDatabase.UsersCollectionName: ${{ secrets.USERS_COLLECTION_NAME }}
           203StuddyBuddyDatabase.UserRoleCollectionName: ${{ secrets.USER_ROLE_COLLECTION_NAME }}
           203StuddyBuddyDatabase.ArticlesCollectionName: ${{ secrets.ARTICLES_COLLECTION_NAME }}
-
+          
+          JWTSettings.securityKey: ${{ secrets.JWT_SECURITY_KEY }}
+          JWTSettings.validIssuer: ${{ secrets.JWT_VALID_ISSUER }}
+          JWTSettings.validAudience: ${{ secrets.JWT_VALID_AUDIENCE }}
+          JWTSettings.expireInMinutes: ${{ secrets.JWT_EXPIRE_IN_MINUTES }}
+          
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
