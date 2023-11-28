@@ -60,6 +60,7 @@ jobs:
           203StuddyBuddyDatabase.ConnectionString: ${{ secrets.MONGODB_CONNECTION_STRING }}
           203StuddyBuddyDatabase.DatabaseName: ${{ secrets.DATABASE_NAME }}
           203StuddyBuddyDatabase.UsersCollectionName: ${{ secrets.USERS_COLLECTION_NAME }}
+          203StuddyBuddyDatabase.UserRoleCollectionName: ${{ secrets.USER_ROLE_COLLECTION_NAME }}
           203StuddyBuddyDatabase.ArticlesCollectionName: ${{ secrets.ARTICLES_COLLECTION_NAME }}
 
       - name: Build with dotnet
