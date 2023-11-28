@@ -18,6 +18,6 @@ namespace senior_project.Models
         public string email { get; set; } = null!;
 
         [BsonElement("saved-articles")]
-        public List<String> savedArticles {get; set;} = null!;
+        public List<String>? savedArticles {get; set;} = null!;
     }
 }

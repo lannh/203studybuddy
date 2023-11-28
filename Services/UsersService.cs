@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using senior_project.Models;
 
@@ -8,6 +9,7 @@ namespace senior_project.Services
     public class UsersService
     {
         private readonly IMongoCollection<User> _usersCollection;
+        private readonly IMongoCollection<UserRoleModel> _userRoleCollection;
 
         public UsersService(
             IOptions<DatabaseSettings> databaseSettings)
@@ -20,6 +22,8 @@ namespace senior_project.Services
 
             _usersCollection = mongoDatabase.GetCollection<User>(
                 databaseSettings.Value.UsersCollectionName);
+            _userRoleCollection = mongoDatabase.GetCollection<UserRoleModel>(
+                databaseSettings.Value.UserRoleCollectionName);
         }
 
         public async Task<List<User>> GetAsync() =>
@@ -43,6 +47,25 @@ namespace senior_project.Services
         public async Task<User?> FindByUserNameAsync(string username) =>
             await _usersCollection.Find(x => x.userName == username).FirstOrDefaultAsync();
 
+        public async Task<UpdateResult> AddNewSavedArticleAsync(string email, string articleId)
+        {
+            var filter = Builders<User>.Filter.Eq("email", email);
+            var update = Builders<User>.Update.Push("saved-articles",articleId);
+
+            return await _usersCollection.UpdateOneAsync(filter, update);
+        }
+
+        public async Task AddNewRoleAsync(UserRoleModel newUserRole) => 
+            await _userRoleCollection.InsertOneAsync(newUserRole);
+
+        public async Task<List<UserRoleModel>> GetRolesAsync() =>
+            await _userRoleCollection.Find(_ => true).ToListAsync();
+
+        public async Task<List<String>> GetRolesByUserEmailAsync(string email)
+        {
+            return await _userRoleCollection.Find(x => x.UserEmail == email)
+                .Project(x => x.Role).ToListAsync();
+        }
     }
 }
 

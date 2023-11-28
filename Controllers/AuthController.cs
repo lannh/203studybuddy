@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using senior_project.Models;
 using senior_project.Services;
@@ -20,10 +21,14 @@ namespace senior_project.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly JwtHandler _jwtHandler;
         private readonly UsersService _usersService;
 
-        public AuthController(UsersService usersService) =>
+        public AuthController(UsersService usersService, JwtHandler jwtHandler)
+        {
             _usersService = usersService;
+            _jwtHandler = jwtHandler;
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel userToAuth)
@@ -38,19 +43,13 @@ namespace senior_project.Controllers
             if (user == null || !BCrypt.Net.BCrypt.EnhancedVerify(userToAuth.Password, user.password, HashType.SHA512))
                 return Unauthorized();
 
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                var tokeOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:5001",
-                    audience: "https://localhost:5001",
-                    claims: new List<Claim> { new Claim(ClaimTypes.Email, userToAuth.Email) }, //can be used for roles
-                    expires: DateTime.Now.AddYears(5),
-                    signingCredentials: signinCredentials
-                );
+            var signingCredentials = _jwtHandler.GetSigningCredentials();
+            var claims = await _jwtHandler.GetClaims(userToAuth);
+            var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
 
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-                return Ok(new AuthenticatedResponse { Token = tokenString });
+            return Ok(new AuthenticatedResponse { Token = tokenString });
         }
 
         [HttpPost("register")]
@@ -77,6 +76,11 @@ namespace senior_project.Controllers
             try
             {
                 await _usersService.CreateAsync(userToReg);
+                await _usersService.AddNewRoleAsync(
+                    new UserRoleModel() {
+                        UserEmail = userToReg.email,
+                        Role = UserRole.Viewer.ToString()
+                    });
             }
             catch
             {

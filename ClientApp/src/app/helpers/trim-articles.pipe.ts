@@ -7,7 +7,7 @@ export class TrimArticlesPipe implements PipeTransform {
     let newList: Article[] = articles.map(article => 
       new Article(undefined, article.label, article.title, 
         //cut down the description to display in tab view
-        article.description.substring(0, 150), article.isSave));
+        article.description.substring(0, 150), article.isSave, article.id));
         
     return newList;
   }

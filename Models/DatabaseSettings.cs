@@ -3,13 +3,15 @@ namespace senior_project.Models
 {
     public class DatabaseSettings
     {
-        public string ConnectionString { get; set; } = null!;
+        public required string ConnectionString { get; set; }
 
-        public string DatabaseName { get; set; } = null!;
+        public required string DatabaseName { get; set; }
 
-        public string UsersCollectionName { get; set; } = null!;
+        public required string UsersCollectionName { get; set; }
 
-        public string ArticlesCollectionName { get; set; } = null!;
+        public required string UserRoleCollectionName { get; set; } 
+
+        public required string ArticlesCollectionName { get; set; }
 
     }
 }

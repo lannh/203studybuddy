@@ -1,0 +1,9 @@
+.forbidden-text{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #3B5550;
+}

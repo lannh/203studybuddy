@@ -52,6 +52,9 @@ import { ChatbotBtnComponent } from './components/chatbot-btn/chatbot-btn.compon
 import { ChatbotDialogComponent } from './components/chatbot-dialog/chatbot-dialog.component';
 import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ChatbotPageComponent } from './components/chatbot-page/chatbot-page.component';
+import { UploadTrainingFilesComponent } from './components/upload-training-files/upload-training-files.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { AdminGuard } from './helpers/admin.guard';
 
 
 
@@ -80,7 +83,9 @@ export function tokenGetter() {
     SavedPagesComponent,
     ChatbotBtnComponent,
     ChatbotDialogComponent,
-    ChatbotPageComponent
+    ChatbotPageComponent,
+    UploadTrainingFilesComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -88,6 +93,7 @@ export function tokenGetter() {
     FormsModule,
     RouterModule.forRoot([
       { path: 'counter', component: CounterComponent },
+      { path: 'forbidden', component: ForbiddenComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       {
         path: 'test-page',
@@ -108,6 +114,11 @@ export function tokenGetter() {
         path: 'saved-articles',
         component: SavedPagesComponent,
         canActivate: [AuthGuard],
+      },
+      {
+        path: 'upload-training-files',
+        component: UploadTrainingFilesComponent,
+        canActivate: [AuthGuard, AdminGuard],
       },
       {
         path: 'chatbot',
@@ -149,7 +160,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:5001"],
+        allowedDomains: ["localhost:5001","https://203studybuddy.azurewebsites.net/"],
         disallowedRoutes: []
       }
     }),

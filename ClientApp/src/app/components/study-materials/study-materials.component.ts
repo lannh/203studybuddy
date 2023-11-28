@@ -31,7 +31,7 @@ export class StudyMaterialsComponent {
     private flowDataService: FlowdataService,
     private router: Router,
     private alertService: AlertService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
     //private weatherClient: WeatherClient
   ) { }
 
@@ -98,11 +98,19 @@ export class StudyMaterialsComponent {
   }
 
   changeSaveStatus(post: Article) {
-    var index = this.articles.findIndex(article => article.title===post.title);
-    this.articles[index].isSave = !this.articles[index].isSave;
+    console.log(this.articles)
+    this.flowDataService.postASavedArticle(post).subscribe(res => {
+      if(res !== 0)
+      {
+        var index = this.articles.findIndex(article => article.title===post.title);
+        this.articles[index].isSave = !this.articles[index].isSave;
 
-    this.savedArticles = this.articles.filter(article => article.isSave);
-    this.flowDataService.articles = this.articles;
+        this.savedArticles = this.articles.filter(article => article.isSave);
+        this.flowDataService.articles = this.articles;
+      }
+      else
+        console.log("error while saving an article");
+    });
   }
 
     //on click event

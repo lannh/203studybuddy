@@ -72,4 +72,14 @@ export class AuthenticationService {
   public getToken(): string | null {
     return this.isLoggedIn() ? localStorage.getItem(this.tokenKey) : null;
   }
+
+  public isUserAdmin = (): boolean => {
+    const token = localStorage.getItem("jwt");
+    if(token===null)
+      return false;
+
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    const roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+    return roles && roles.includes('Admin');
+  }
 }

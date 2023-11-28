@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using senior_project.Models;
 using senior_project.Services;
 
@@ -55,8 +56,9 @@ namespace senior_project.Controllers
             return user.savedArticles;
         }
 
-        [HttpPost("saved-article"), Authorize]
-        public async Task<ActionResult<List<string>>> PostSavedArticle(string articleId)
+        [HttpPut, Authorize]
+        [Route("saved-articles")]
+        public async Task<ActionResult<long>> AddSavedArticle([FromBody] Article article)
         {
             var email = User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value;
 
@@ -72,7 +74,8 @@ namespace senior_project.Controllers
                 return BadRequest("Invalid access token"); ;
             }
 
-            return user.savedArticles;
+            var res = await _usersService.AddNewSavedArticleAsync(user.email, article.id);
+            return res.ModifiedCount;
         }
 
         [HttpPost]

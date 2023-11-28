@@ -12,13 +12,13 @@ export class AuthenticationClient {
   constructor(private http: HttpClient) { }
 
   public login(credentials: LoginModel): Observable<AuthenticatedResponse> {
-    return this.http.post<AuthenticatedResponse>("https://localhost:5001/api/auth/login", credentials, {
+    return this.http.post<AuthenticatedResponse>(environment.apiUrl+"/auth/login", credentials, {
       headers: new HttpHeaders({ "Content-Type": "application/json"})
     });
   }
 
   public register(newUser: RegisterModel): Observable<AuthenticatedResponse> {
-    return this.http.post<AuthenticatedResponse>("https://localhost:5001/api/auth/register", newUser, {
+    return this.http.post<AuthenticatedResponse>(environment.apiUrl+"/auth/register", newUser, {
       headers: new HttpHeaders({ "Content-Type": "application/json"})
     });
   }

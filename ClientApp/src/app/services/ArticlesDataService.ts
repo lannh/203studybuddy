@@ -62,6 +62,11 @@ export class FlowdataService {
     return this.http.get<string[]>(this.savedArticlesURL).pipe(shareReplay(1));
   }
 
+  postASavedArticle(article: Article): Observable<Number> {
+    console.log(article)
+    return this.http.put<Number>(this.savedArticlesURL, article);
+  }
+
   saveArticle(article: Article){
     localStorage.setItem('article', JSON.stringify(article))
   }

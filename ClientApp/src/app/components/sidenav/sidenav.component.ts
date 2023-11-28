@@ -26,4 +26,8 @@ export class SidenavComponent {
   logOut(): void {
     this.authenticationService.logout();
   }
+  
+  isAdmin() : boolean{
+    return this.authenticationService.isUserAdmin()
+  }
 }
