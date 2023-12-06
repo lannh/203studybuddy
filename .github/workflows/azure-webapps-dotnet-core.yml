@@ -20,7 +20,7 @@
 name: Build and deploy ASP.Net Core app to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: 203StudyBuddy    # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: 203-study-buddy    # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '7.0'                 # set this to the .NET Core version to use
   
@@ -60,8 +60,14 @@ jobs:
           203StuddyBuddyDatabase.ConnectionString: ${{ secrets.MONGODB_CONNECTION_STRING }}
           203StuddyBuddyDatabase.DatabaseName: ${{ secrets.DATABASE_NAME }}
           203StuddyBuddyDatabase.UsersCollectionName: ${{ secrets.USERS_COLLECTION_NAME }}
+          203StuddyBuddyDatabase.UserRoleCollectionName: ${{ secrets.USER_ROLE_COLLECTION_NAME }}
           203StuddyBuddyDatabase.ArticlesCollectionName: ${{ secrets.ARTICLES_COLLECTION_NAME }}
-
+          
+          JWTSettings.securityKey: ${{ secrets.JWT_SECURITY_KEY }}
+          JWTSettings.validIssuer: ${{ secrets.JWT_VALID_ISSUER }}
+          JWTSettings.validAudience: ${{ secrets.JWT_VALID_AUDIENCE }}
+          JWTSettings.expireInMinutes: ${{ secrets.JWT_EXPIRE_IN_MINUTES }}
+          
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
