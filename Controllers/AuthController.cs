@@ -71,6 +71,7 @@ namespace senior_project.Controllers
 
             var hashPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(userToReg.password, HashType.SHA512);
             userToReg.password = hashPassword;
+            userToReg.savedArticles = new List<string>();
 
 
             try
