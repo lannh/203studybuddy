@@ -65,6 +65,11 @@ export class FlowdataService {
     return this.http.put<Number>(this.savedArticlesURL, article);
   }
 
+  delASavedArticle(article: Article): Observable<Number> {
+    console.log(article)
+    return this.http.delete<Number>(this.savedArticlesURL+"/"+article.id);
+  }
+
   saveArticle(article: Article){
     localStorage.setItem('article', JSON.stringify(article))
   }

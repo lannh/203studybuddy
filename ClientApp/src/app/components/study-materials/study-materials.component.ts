@@ -88,20 +88,43 @@ export class StudyMaterialsComponent {
 
   changeSaveStatus(post: Article) {
     console.log(this.articles)
-    this.flowDataService.postASavedArticle(post).subscribe(res => {
-      if(res !== 0)
-      {
-        var index = this.articles.findIndex(article => article.title===post.title);
-        this.articles[index].isSave = !this.articles[index].isSave;
 
-        this.savedArticles = this.articles.filter(article => article.isSave);
-        this.flowDataService.articles = this.articles;
-      }
-      else
-        console.log("error while saving an article");
-    });
+    var index = this.articles.findIndex(article => article.title===post.title);
+
+    if(this.articles[index].isSave===false)
+    {
+      this.flowDataService.postASavedArticle(post).subscribe(res => {
+        if(res !== 0)
+        {
+          this.articles[index].isSave = !this.articles[index].isSave;
+  
+          this.refreshSavedArticles();
+        }
+        else
+          console.log("error while saving an article");
+      });
+    }
+    else{
+      this.flowDataService.delASavedArticle(post).subscribe(res => {
+        if(res !== 0)
+        {
+          this.articles[index].isSave = !this.articles[index].isSave;
+  
+          this.refreshSavedArticles();
+        }
+        else
+          console.log("error while saving an article");
+      });
+    }
+
+
   }
 
+  refreshSavedArticles()
+  {
+    this.savedArticles = this.articles.filter(article => article.isSave);
+    this.flowDataService.articles = this.articles;
+  }
     //on click event
   onArticleClick(newArticle: Article) {
       console.log(newArticle);

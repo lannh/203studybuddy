@@ -63,6 +63,27 @@ namespace senior_project.Controllers
             return res.ModifiedCount;
         }
 
+        [HttpDelete, Authorize]
+        [Route("saved-articles/{articleId}")]
+        public async Task<ActionResult<long>> DelASavedArticle([FromRoute(Name = "articleId")] string id)
+        {
+            var email = User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value;
+
+            if (email is null)
+            {
+                return BadRequest("Invalid access token");
+            }
+
+            var user = await _usersService.FindByEmailAsync(email);
+
+            if (user is null)
+            {
+                return BadRequest("Invalid access token"); ;
+            }
+
+            var res = await _usersService.DelASavedArticleAsync(user.email, id);
+            return res.ModifiedCount;
+        }
     }
 }
 

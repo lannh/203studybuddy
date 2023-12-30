@@ -53,6 +53,14 @@ namespace senior_project.Services
             return await _usersCollection.UpdateOneAsync(filter, update);
         }
 
+        public async Task<UpdateResult> DelASavedArticleAsync(string email, string articleId)
+        {
+            var filter = Builders<User>.Filter.Eq("email", email);
+            var update = Builders<User>.Update.Pull("saved-articles", articleId);
+
+            return await _usersCollection.UpdateOneAsync(filter, update);
+        }
+
         public async Task AddNewRoleAsync(UserRoleModel newUserRole) => 
             await _userRoleCollection.InsertOneAsync(newUserRole);
 

@@ -82,9 +82,39 @@ export class SavedPagesComponent {
   }
 
   changeSaveStatus(post: Article) {
-    var index = this.savedArticles.findIndex(article => article.title===post.title);
-    this.savedArticles[index].isSave = !this.savedArticles[index].isSave;
 
+    var index = this.savedArticles.findIndex(article => article.title===post.title);
+
+    if(this.savedArticles[index].isSave===false)
+    {
+      this.flowDataService.postASavedArticle(post).subscribe(res => {
+        if(res !== 0)
+        {
+          this.savedArticles[index].isSave = !this.savedArticles[index].isSave;
+  
+          this.refreshSavedArticles();
+        }
+        else
+          console.log("error while saving an article");
+      });
+    }
+    else{
+      this.flowDataService.delASavedArticle(post).subscribe(res => {
+        if(res !== 0)
+        {
+          this.savedArticles[index].isSave = !this.savedArticles[index].isSave;
+  
+          this.refreshSavedArticles();
+        }
+        else
+          console.log("error while saving an article");
+      });
+    }
+
+  }
+
+  refreshSavedArticles()
+  {
     this.savedArticles = this.savedArticles.filter(article => article.isSave);
   }
 
