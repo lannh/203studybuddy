@@ -19,7 +19,7 @@
                 <div class="tab-view">
                     <div class="article-view">
                         <div *ngIf="(getArticlesFrom(tab)  | articlesFilter:searchValue | trimArticles) as articlesList">
-                        <div  class="one-article-view" *ngFor="let article of articlesList">
+                            <div  class="one-article-view" *ngFor="let article of articlesList">
 
                                 <div class="article-title">
                                         <div role="button" [routerLink]="['/articles', article.title]" (click)="onArticleClick(article)" class="nav-item">
@@ -35,8 +35,7 @@
                                     <img *ngIf="!article.isSave" class="icon" src="assets/unsaved.png" (click)="changeSaveStatus(article)"/>
                                 </div>
                             
-                        </div>
-                        
+                            </div>
 
                             <div class="no-result-found">
                                 <span class="no-result-found-text" *ngIf="articlesList.length === 0">No Results Found</span>
@@ -49,35 +48,32 @@
       
     </div>
     <div class="saved-pages-view">
-      <h1>Saved articles</h1>
+        <h1>Saved articles</h1>
 
 
         <div class="saved-articles-list" *ngFor="let article of (savedArticles  | trimArticles) as articlesList">
 
-            <!-- <mat-icon matListItemIcon><img class="icon" src="assets/home.png"/></mat-icon>
--->
-
-<mat-card class="saved-article-card">
-    <mat-card-content>
+            <mat-card class="saved-article-card">
+                <mat-card-content>
 
 
-            <div class="saved-article-item">
-                <div class="saved-article-title">
-                        <div role="button" [routerLink]="['/articles', article.title]" (click)="onArticleClick(article)">
-                            <span class="saved-article-title-text">{{article.title}}</span>
+                    <div class="saved-article-item">
+                        <div class="saved-article-title">
+                                <div role="button" [routerLink]="['/articles', article.title]" (click)="onArticleClick(article)">
+                                    <span class="saved-article-title-text">{{article.title}}</span>
 
-                        </div>                
-                </div>
+                                </div>                
+                        </div>
 
-                <div class="save-btn">
-                    <img *ngIf="article.isSave" class="icon" src="assets/saved.png" (click)="changeSaveStatus(article)"/>
-                    <img *ngIf="!article.isSave" class="icon" src="assets/unsaved.png" (click)="changeSaveStatus(article)"/>
-                </div>
-            </div>
+                        <div class="save-btn">
+                            <img *ngIf="article.isSave" class="icon" src="assets/saved.png" (click)="changeSaveStatus(article)"/>
+                            <img *ngIf="!article.isSave" class="icon" src="assets/unsaved.png" (click)="changeSaveStatus(article)"/>
+                        </div>
+                    </div>
 
-        </mat-card-content>
-    </mat-card>
-  </div>
-  
-  
-  
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+

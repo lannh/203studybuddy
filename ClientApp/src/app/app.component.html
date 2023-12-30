@@ -1,8 +1,6 @@
 <body *ngIf="isUserAuthenticated()">
-<!-- <body *ngIf="!isUserAuthenticated()"> -->
   <mat-sidenav-container>
     <mat-sidenav #sidenav role="navigation">
-      <!--side-nav list-->
       <app-sidenav (sidenavClose)="sidenav.close()"></app-sidenav>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -25,7 +23,6 @@
 
 
 <body *ngIf="!isUserAuthenticated()">
-<!-- <body *ngIf="isUserAuthenticated()"> -->
         <router-outlet></router-outlet>
 </body>
 

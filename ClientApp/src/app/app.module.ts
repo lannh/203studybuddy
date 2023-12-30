@@ -24,11 +24,6 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
@@ -65,11 +60,6 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    HomepageComponent,
     LoginComponent,
     RegisterComponent,
     AlertComponent,
@@ -92,14 +82,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'counter', component: CounterComponent },
       { path: 'forbidden', component: ForbiddenComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      {
-        path: 'test-page',
-        component: HomepageComponent,
-        canActivate: [AuthGuard],
-      },
       {
         path: '',
         component: StudyMaterialsComponent,

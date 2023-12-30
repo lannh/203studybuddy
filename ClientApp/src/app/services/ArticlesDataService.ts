@@ -4,9 +4,7 @@ import { Article, RawArticle } from '../components/tutorial-content/ArticleModel
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { retry, shareReplay } from 'rxjs/operators';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { of } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 
 @Injectable({
@@ -54,12 +52,12 @@ export class FlowdataService {
 
   getArticlesDataFromServer(): Observable<RawArticle[]> {
     console.log("http request for articles")
-    return this.http.get<RawArticle[]>(this.rawDataUrl).pipe(shareReplay(1));
+    return this.http.get<RawArticle[]>(this.rawDataUrl);
   }
 
   getSavedArticlesFromServer(): Observable<string[]> {
     console.log("http request for saved articles")
-    return this.http.get<string[]>(this.savedArticlesURL).pipe(shareReplay(1));
+    return this.http.get<string[]>(this.savedArticlesURL);
   }
 
   postASavedArticle(article: Article): Observable<Number> {

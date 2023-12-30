@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -22,16 +17,6 @@ namespace senior_project.Controllers
 
         public UsersController(UsersService usersService) =>
             _usersService = usersService;
-
-        [HttpGet, Authorize]
-        public string GetAuthorize()
-        {
-            return "successfully logged in";
-        }
-
-       /* [HttpGet]
-        public async Task<List<User>> Get() =>
-            await _usersService.GetAsync();*/
 
         [HttpGet("saved-articles"), Authorize]
         public async Task<ActionResult<List<string>>> Get()
@@ -78,45 +63,6 @@ namespace senior_project.Controllers
             return res.ModifiedCount;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post(User newUser)
-        {
-            await _usersService.CreateAsync(newUser);
-
-            return CreatedAtAction(nameof(Get), new { id = newUser.id }, newUser);
-        }
-
-        [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> Update(string id, User updatedUser)
-        {
-            var user = await _usersService.GetAsync(id);
-
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            updatedUser.id = user.id;
-
-            await _usersService.UpdateAsync(id, updatedUser);
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id:length(24)}")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var user = await _usersService.GetAsync(id);
-
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            await _usersService.RemoveAsync(id);
-
-            return NoContent();
-        }
     }
 }
 

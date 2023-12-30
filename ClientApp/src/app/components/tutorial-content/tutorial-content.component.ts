@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FlowdataService } from 'src/app/services/ArticlesDataService';
 import { Article } from './ArticleModel';
 import { ActivatedRoute, Router } from '@angular/router';

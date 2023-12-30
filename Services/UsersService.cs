@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Options;
-using MongoDB.Bson;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using senior_project.Models;
 

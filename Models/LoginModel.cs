@@ -1,5 +1,4 @@
-﻿using System;
-namespace senior_project.Models
+﻿namespace senior_project.Models
 {
     public class LoginModel
     {

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import * as $ from 'jquery'; 
 
 
 @Component({
@@ -8,8 +7,6 @@ import * as $ from 'jquery';
   styleUrls: ['./pagenotfound.component.css']
 })
 export class PagenotfoundComponent {
-
-
 }
 
 

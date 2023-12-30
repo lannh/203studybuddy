@@ -1,11 +1,10 @@
 import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { Article, RawArticle } from '../tutorial-content/ArticleModel';
+import { Article } from '../tutorial-content/ArticleModel';
 import { FlowdataService } from 'src/app/services/ArticlesDataService';
 import { Router } from '@angular/router';
 import { HttpErrorResponse, HttpUrlEncodingCodec } from '@angular/common/http';
 import { AlertService } from 'src/app/services/alert.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-saved-pages',
@@ -36,43 +35,33 @@ export class SavedPagesComponent {
   ngOnInit(): void {
     console.log("ng oninit")
 
-    if(this.flowDataService.articles.length === 0){
-      console.log("get data from service")
-      this.flowDataService._articles
-        .subscribe({
-          next: (data) => {
-            this.flowDataService._savedArticles
-              .subscribe({          
-                next: (savedArticlesdata) => {
-                  this.flowDataService.savedArticles = savedArticlesdata;
-                  let tmpArticles = this.flowDataService.checkForSavedArticles(data);
-                  this.flowDataService.articles = tmpArticles;
-                  this.savedArticles = tmpArticles.filter(article => article.isSave);
-                },
-                error: (err: HttpErrorResponse) => {
-                  console.log(err)
-                  this.alertService.error(err.error);
-                  this.savedArticles = [];
-                }
-            })
+    console.log("get data from service")
+    this.flowDataService._articles
+      .subscribe({
+        next: (data) => {
+          this.flowDataService._savedArticles
+            .subscribe({          
+              next: (savedArticlesdata) => {
+                this.flowDataService.savedArticles = savedArticlesdata;
+                let tmpArticles = this.flowDataService.checkForSavedArticles(data);
+                this.flowDataService.articles = tmpArticles;
+                this.savedArticles = tmpArticles.filter(article => article.isSave);
+              },
+              error: (err: HttpErrorResponse) => {
+                console.log(err)
+                this.alertService.error(err.error);
+                this.savedArticles = [];
+              }
+          })
 
-          },
-          error: (err: HttpErrorResponse) => {
-            console.log(err)
-            this.alertService.error(err.error);
-            this.savedArticles = [];
-          }
-        });
-    
-    }
-    else
-    {
-      console.log(this.flowDataService.articles)
-
-      let articles = this.flowDataService.articles;
-
-      this.savedArticles = articles.filter(article => article.isSave);
-    }
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err)
+          this.alertService.error(err.error);
+          this.savedArticles = [];
+        }
+      });
+  
     this.tabs = ["All","Java", "OOP", "Labs", "Projects"];
     
   }

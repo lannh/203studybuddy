@@ -1,10 +1,3 @@
-// export interface Article {
-//     label: string;
-//     title: string;
-//     description: string;
-//     isSave: boolean;
-// }
-
 export class Article{
     id!: string;
     label!: string;
